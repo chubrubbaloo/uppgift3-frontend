@@ -1,5 +1,5 @@
 import './App.css';
-import ViewPosts from "./pages/ViewPosts";
+import ViewPosts from "./views/ViewPosts";
 
 function App() {
   return (
