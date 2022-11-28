@@ -1,21 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import './ViewPosts.css'
+import '../components/PostsList.css'
 import PostsList from "../components/PostsList";
+import * as api from "../api";
 
 const ViewPosts = () => {
-    const url = 'http://localhost:8080/posts/getAll';
 
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            const result = await fetch(url);
-
-            setPosts(await result.json());
+        async function getPosts(){
+            const data = await api.fetchData();
+            setPosts(data);
         }
-        fetchPosts();
-    }, []);
-
+        getPosts();
+    },[]);
 
     return (
         <>

@@ -1,4 +1,5 @@
 import React from 'react';
+import './PostsList.css'
 
 const PostsList = ({posts, title}) => {
     return (
