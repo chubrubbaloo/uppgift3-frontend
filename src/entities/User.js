@@ -1,8 +1,10 @@
 export default class User{
     username
+    token
 
-    constructor(username) {
+    constructor(username, token=null) {
         this.username = username
+        this.token = token
     }
 
     equals(otherUser){
@@ -10,5 +12,9 @@ export default class User{
             return false
         }
         return (this.username === otherUser.username)
+    }
+
+    isLoggedIn(){
+        return !!this.token
     }
 }
