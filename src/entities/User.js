@@ -1,4 +1,4 @@
-class User{
+export default class User{
     username
 
     constructor(username) {
@@ -12,5 +12,3 @@ class User{
         return (this.username === otherUser.username)
     }
 }
-
-module.exports.User = User

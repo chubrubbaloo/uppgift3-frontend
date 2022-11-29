@@ -3,6 +3,7 @@ import {createContext} from "react";
 import Navbar from "./components/navbar/Navbar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ViewPosts from "./views/viewPosts/ViewPosts";
+import ExampleView from "./views/exampleView/ExampleView";
 
 export const UserContext = createContext(null);
 
@@ -18,7 +19,7 @@ function App() {
                 }}>
                     <Navbar/>
                     <Routes>
-                        <Route index element={<ViewPosts/>}/>
+                        <Route index element={<ExampleView/>}/>
                     </Routes>
                 </div>
             </UserContext.Provider>
