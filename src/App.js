@@ -1,6 +1,6 @@
 import './App.css';
 import {createContext} from "react";
-import Navbar from "./components/navbar/Navbar";
+/*import Navbar from "./components/navbar/Navbar";*/
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ViewPosts from "./views/viewPosts/ViewPosts";
 
@@ -9,14 +9,15 @@ export const UserContext = createContext(null);
 function App() {
     //const [user, setUser] = useState(null)
     return (
-        <BrowserRouter >
+        <BrowserRouter>
             <UserContext.Provider value={null}>
                 <div style={{
                     display: "flex",
                     height: "100vh",
-                    width: "100vw"
+                    width: "100vw",
+                    border: "1px solid"
                 }}>
-                    <Navbar/>
+                   {/* <Navbar/>*/}
                     <Routes>
                         <Route index element={<ViewPosts/>}/>
                     </Routes>
