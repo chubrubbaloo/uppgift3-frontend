@@ -1,0 +1,32 @@
+.post-container {
+    text-align: center;
+    margin: 20px auto;
+    width: 33%;
+}
+
+.post {
+    margin-top: 20px;
+    min-width: 300px;
+    border: 1px solid #eee6e6;
+    box-sizing: border-box;
+    padding: 10px;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    list-style-type: none;
+    text-align: center;
+}
+
+.post, ul {
+    padding: 0;
+}
+
+.post, li {
+    min-width: 300px;
+    border: 1px solid #eee6e6;
+    box-sizing: border-box;
+    padding: 10px;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    list-style-type: none;
+}
+

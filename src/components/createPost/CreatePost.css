@@ -1,0 +1,15 @@
+.post.create .title input{
+    all: inherit;
+    width: 100%;
+}
+
+.post.create .content textarea{
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.open-create{
+    cursor: pointer;
+}

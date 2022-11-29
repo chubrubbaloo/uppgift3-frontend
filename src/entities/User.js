@@ -1,8 +1,10 @@
-class User{
+export default class User{
     username
+    token
 
-    constructor(username) {
+    constructor(username, token=null) {
         this.username = username
+        this.token = token
     }
 
     equals(otherUser){
@@ -11,6 +13,8 @@ class User{
         }
         return (this.username === otherUser.username)
     }
-}
 
-module.exports.User = User
+    isLoggedIn(){
+        return !!this.token
+    }
+}
