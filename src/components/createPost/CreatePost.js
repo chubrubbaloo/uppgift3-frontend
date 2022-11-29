@@ -25,6 +25,9 @@ export default function CreatePost({onCreatedPost = (newPostData) => {}}){
         content.current.value = ""
         setOpen(false)
     }
+    if (!user){
+        return
+    }
     if (open) {
         return (
             <div>
@@ -34,5 +37,6 @@ export default function CreatePost({onCreatedPost = (newPostData) => {}}){
             </div>
         )
     }
+
     return <div className="open-create" onClick={() => setOpen(true)}>Click here to create a new post!</div>
 }

@@ -3,6 +3,7 @@ import {createContext, useState} from "react";
 import Navbar from "./components/navbar/Navbar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ViewPosts from "./views/viewPosts/ViewPosts";
+import LoginView from "./Login/LoginView";
 
 export const UserContext = createContext(null);
 
@@ -15,6 +16,7 @@ function App() {
                     <Navbar/>
                     <Routes>
                         <Route index element={<ViewPosts/>}/>
+                        <Route path="/login" element={<LoginView onSuccessfulLogin={setUser}/>}/>
                     </Routes>
                 </div>
             </UserContext.Provider>

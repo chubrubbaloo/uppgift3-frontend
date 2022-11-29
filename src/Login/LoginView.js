@@ -1,5 +1,6 @@
 import {useRef, useState} from "react";
 import * as api from "../api";
+import User from "../entities/User";
 
 
 export default function LoginView({onSuccessfulLogin = (user) => {}}) {
@@ -16,13 +17,13 @@ export default function LoginView({onSuccessfulLogin = (user) => {}}) {
             return
         }
         const data = await api.login(username, password)
-
+        console.log(data)
         if (!data.user) {
             setMessage(data.message)
             return
         }
 
-        onSuccessfulLogin(data.user)
+        onSuccessfulLogin(new User(data.user.username, data.token))
         setMessage("login Successful")
 
     }
