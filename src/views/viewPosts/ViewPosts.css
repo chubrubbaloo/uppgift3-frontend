@@ -1,0 +1,9 @@
+.posts {
+    min-width: 25%;
+    width: fit-content;
+    margin:auto;
+}
+
+.todo-list ul {
+    padding: 0;
+}

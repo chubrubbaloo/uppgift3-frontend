@@ -1,14 +1,4 @@
-.todo-list {
-    min-width: 25%;
-    width: fit-content;
-    margin:auto;
-}
-
-.todo-list ul {
-    padding: 0;
-}
-
-.todo-list li {
+.post {
     border: 1px solid #eee6e6;
     box-sizing: border-box;
     padding: 10px;
