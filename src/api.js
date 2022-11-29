@@ -35,3 +35,22 @@ export async function createPost(user, title, content) {
     });
     return await response.json();
 }
+
+export async function login(username, password) {
+    
+    
+    const response = await fetch(`${backendUrl}/login`,
+        {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username: username, password: password})
+           
+        }
+        
+    )
+}
+
+
