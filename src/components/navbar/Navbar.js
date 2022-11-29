@@ -13,6 +13,7 @@ export default function Navbar() {
             <h3>{user ? user.username : "not logged in"}</h3>
             <p onClick={() => navigate("/")}>home</p>
             <p onClick={() => navigate("/login")}><CiLogin/></p>
+            <p onClick={() => navigate("/register")}>register</p>
         </div>
     )
 
