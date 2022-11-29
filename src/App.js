@@ -1,8 +1,7 @@
 import './App.css';
 import {createContext} from "react";
-/*import Navbar from "./components/navbar/Navbar";*/
+import Navbar from "./components/navbar/Navbar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import ViewPosts from "./views/viewPosts/ViewPosts";
 import ExampleView from "./views/exampleView/ExampleView";
 
 export const UserContext = createContext(null);
@@ -16,9 +15,8 @@ function App() {
                     display: "flex",
                     height: "100vh",
                     width: "100vw",
-                    border: "1px solid"
                 }}>
-                   {/* <Navbar/>*/}
+                    <Navbar/>
                     <Routes>
                         <Route index element={<ExampleView/>}/>
                     </Routes>
