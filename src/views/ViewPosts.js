@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import '../components/PostsList.css'
 import PostsList from "../components/PostsList";
 import * as api from "../api";
 
@@ -10,7 +9,7 @@ const ViewPosts = () => {
     useEffect(() => {
         async function getPosts(){
             const data = await api.fetchData();
-            setPosts(data);
+            setPosts(await data);
         }
         getPosts();
     },[]);
