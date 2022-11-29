@@ -6,7 +6,7 @@ export async function fetchData() {
 }
 
 export async function register(username, password) {
-    const response = await fetch(`${backendUrl}/register`,
+    await fetch(`${backendUrl}/register`,
         {
             method: "POST",
             mode: "cors",
@@ -26,8 +26,9 @@ export async function createPost(user, title, content) {
     }
     const response = await fetch(`${backendUrl}/posts`, {
         method:"POST",
+        mode: 'cors',
         headers: {
-            'authorization': "bearer: " + user.token,
+            'authorization': "bearer " + user.token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({title: title, content: content})
@@ -37,8 +38,8 @@ export async function createPost(user, title, content) {
 }
 
 export async function login(username, password) {
-    
-    
+
+
     const response = await fetch(`${backendUrl}/login`,
         {
             method: "POST",
@@ -47,10 +48,12 @@ export async function login(username, password) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({username: username, password: password})
-           
+
         }
-        
+
     )
+
+    return await response.json()
 }
 
 
