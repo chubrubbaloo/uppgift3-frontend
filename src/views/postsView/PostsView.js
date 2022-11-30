@@ -25,7 +25,7 @@ const PostsView = () => {
         <div className="posts">
             <h2>Posts</h2>
             <ul>
-                <li className="create-post">
+                <li>
                     <CreatePost onCreatedPost={addPost}/>
                 </li>
                 {posts.map((post) => (
