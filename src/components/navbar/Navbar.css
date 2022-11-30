@@ -1,8 +1,51 @@
+.navbar-container{
+    width: 71px;
+    z-index: 1000;
+}
+
 .navbar{
-    display: flex;
-    flex-direction: column;
+    width: 50px;
+    height: calc(100% - 35px);
+    transition-duration: 0.18s;
+    padding-top: 35px;
+    padding-left: 18px;
     background-color: darkgreen;
-    width: 150px;
+    border-right: #282c34 solid 3px;
+}
+
+.navbar.open{
+    width: 130px;
+}
+
+.navbar .user{
+    margin-bottom: 20px;
+}
+
+.navbar .user, .navbar .link{
+    display: flex;
+    align-items: center;
+    overflow:hidden;
+}
+
+.navbar .text, .navbar text{
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.navbar .link{
+    margin-top: 1.25em;
+    cursor: pointer;
+    transition-duration: 0.1s;
+}
+
+.navbar .link:hover{
+    transform:scale(1.1);
+}
+
+
+.navbar .icon{
+    font-size: 2.5em;
+    flex-shrink: 0;
 }
 
 .navbar:hover{
