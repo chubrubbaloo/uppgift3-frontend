@@ -1,5 +1,7 @@
 const backendUrl = "http://localhost:8080";
 
+/*const [jwt, setJwt] = useLocalState("", "jwt");*/
+
 export async function fetchData() {
     const response = await fetch(`${backendUrl}/posts/getAll`);
     return await response.json();
@@ -39,21 +41,26 @@ export async function createPost(user, title, content) {
 
 export async function login(username, password) {
 
-
     const response = await fetch(`${backendUrl}/login`,
         {
             method: "POST",
             mode: "cors",
             headers: {
+                
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({username: username, password: password})
 
-        }
+        })
+       
+           if (response.status === 200) {
 
-    )
-
-    return await response.json()
+            return await response.json();
+           }
+            else 
+            return {message:"Invalid login attempt, please register!"};     
+    
+    
 }
 
 

@@ -15,10 +15,12 @@ export default function LoginView({onSuccessfulLogin = (user) => {}}) {
         const password = passwordInput.current.value
 
         if (!username || !password) {
+            
             return
+
         }
         const data = await api.login(username, password)
-        console.log(data)
+        
         if (!data.user) {
             setMessage(data.message)
             return

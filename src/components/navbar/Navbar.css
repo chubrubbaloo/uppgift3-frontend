@@ -4,3 +4,7 @@
     background-color: darkgreen;
     width: 150px;
 }
+
+.navbar:hover{
+    cursor: pointer;
+}
