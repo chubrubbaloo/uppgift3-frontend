@@ -1,11 +1,11 @@
-.login_view{
+.login_view {
     background-color: rgba(158, 169, 132, 0.906);
     display: grid;
     align-items: flex-start;
     justify-content: center;
-    height: 100%;
     width: 100%;
 }
+
 .login_view h1 {
     margin-top: 40px;
     justify-self: center;
