@@ -21,19 +21,16 @@ const PostsView = () => {
     }
 
     function onPostDelete(title){
-        const changedPosts = posts.filter((element) => {
-            return element.title !== title;
-
-        })
+        const changedPosts = posts.filter((post) => post.title !== title)
         setPosts(changedPosts)
     }
 
-    function onPostEdit(post){
-        const changedPosts = posts.map((element) => {
-            if (element.title === post.title){
-                return {...element, content:post.content}
+    function onPostEdit(editedPost){
+        const changedPosts = posts.map((post) => {
+            if (post.title === editedPost.title){
+                return {...post, content:editedPost.content}
             }
-            return element
+            return post
         })
         setPosts(changedPosts)
     }
@@ -48,7 +45,7 @@ const PostsView = () => {
                     </li>
                     {posts.map((post) => (
                         <li key={post.title}>
-                            <Post title={post.title} content={post.content} creator={post.creator} onEdit={onPostEdit} onDelete={onPostDelete}/>
+                            <Post title={post.title} initContent={post.content} creator={post.creator} onEdit={onPostEdit} onDelete={onPostDelete}/>
                         </li>
                     ))}
                 </ul>
