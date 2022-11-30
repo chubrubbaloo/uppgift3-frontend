@@ -17,23 +17,25 @@ const PostsView = () => {
         getPosts();
     }, []);
 
-    function addPost(postData){
+    function addPost(postData) {
         setPosts([postData, ...posts])
     }
 
     return (
-        <div className="posts">
-            <h2>Posts</h2>
-            <ul>
-                <li>
-                    <CreatePost onCreatedPost={addPost}/>
-                </li>
-                {posts.map((post) => (
-                    <li key={post.title}>
-                        <Post title={post.title} content={post.content} creator={post.creator}/>
+        <div className="posts-container">
+            <div className="posts">
+                <h2>Posts</h2>
+                <ul>
+                    <li>
+                        <CreatePost onCreatedPost={addPost}/>
                     </li>
-                ))}
-            </ul>
+                    {posts.map((post) => (
+                        <li key={post.title}>
+                            <Post title={post.title} content={post.content} creator={post.creator}/>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };

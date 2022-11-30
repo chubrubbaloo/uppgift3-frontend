@@ -1,12 +1,17 @@
+.posts-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .posts {
     min-width: 33%;
     width: fit-content;
-    margin:auto;
     text-align: center;
 }
 
 .posts h2{
-    margin-left: 40px;
+margin-left: 40px;
 }
 
 .posts ul {
