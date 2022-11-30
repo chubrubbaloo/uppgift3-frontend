@@ -1,17 +1,19 @@
 import { useRef, useState, useEffect} from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import * as api from "./api";
+import * as api from "../../api";
+import {useNavigate} from "react-router-dom";
+import "./RegisterView.css";
 
-// 15:23 https://www.youtube.com/watch?v=brcHK3P6ChQ&list=PL0Zuz27SZ-6PRCpm9clX0WiBEMB70FWwd&ab_channel=DaveGray
 
-// Regex-regler för användarnamn och lösenord.
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-//const REGISTER_URL = '/register';
+const USER_REGEX = /^.{1,50}$/;
+const PWD_REGEX = /^.{1,50}$/;
+
 
 // Funktions-komponent: RegisterComponent
-const RegisterComponent = () => {
+const RegisterView = () => {
+
+    const navigate = useNavigate()
 
     //useRef-referenser (username-input & fel)
     const userRef = useRef();
@@ -32,6 +34,7 @@ const RegisterComponent = () => {
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
 
+
     // Meddelande om registrering lyckas eller ej
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
@@ -43,54 +46,33 @@ const RegisterComponent = () => {
 
     // Match användarnamn-input mot "[username]"
     useEffect(() => {
-        const result = USER_REGEX.test(username);
-        console.log(result);
-        console.log(username);
-        setValidName(result);
+        setValidName(USER_REGEX.test(username));
     }, [username])
 
     //lösenord, matcha lösenord
     useEffect(() => {
-        const result = PWD_REGEX.test(password);
-        console.log(result);
-        console.log(password);
-        setValidPwd(result);
+        setValidPwd(PWD_REGEX.test(password));
         const match = password === matchPwd;
         setValidMatch(match);
     }, [password, matchPwd])
 
-    //felmeddelande
+
+//felmeddelande
     useEffect(() => {
         setErrMsg('');
     }, [username, password, matchPwd])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Förhindra att knappen ändras till "enabled" via JS-hack:
-
-        /*
-        const v1 = USER_REGEX.text(username);
-        const v2 = PWD_REGEX.text(password);
-        if (!v1 || !v2) {
-            setErrMsg("Invalid Entry");
-
-            return;
-        }
-        */
 
         try {
-            //const response = await api.register(REGISTER_URL, JSON.stringify({username, password}),
-            //const response = await api.register(JSON.stringify({username, password}),
-            //const response = await api.register(username, password)
-            await api.register(username, password)
-            //{
-                    //headers: {'Content-Type': 'application/json'},
-                    //withCredentials: true
-                //}
-            //console.log(response.data);
-            //console.log(response.accessToken);
-            //console.log(JSON.stringify(response))
+            const data = await api.register(username, password)
+            if(data.messager !== "Registration successful") {
+                setErrMsg(data.messager)
+                return
+            }
             setSuccess(true);
+
             // clear input fields
         } catch (err) {
             if (!err?.response) {
@@ -104,27 +86,18 @@ const RegisterComponent = () => {
         }
     }
 
-        //console.log(username, password);
-        //setSuccess(true);
-
-        //await api.register(username, password);
-        //28:30 (koppla till backend)
-        //35:41
-
     return (
         <>
             {success ? (
                 <section>
-                    <h1>Success!</h1>
-                    <p>
-                    <a href="#">Logga in</a>
-                    </p>
+                    <h1>Registration Successful!</h1>
+                        <button onClick={() => navigate("/login")}>Log in</button>
                 </section>
             ) : (
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" :
                 "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Registrera användare</h1>
+            <h1>Register User</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">
                     Username:
@@ -148,20 +121,12 @@ const RegisterComponent = () => {
                     onFocus={() => setUserFocus(true)}
                     onBlur={() => setUserFocus(false)}
                     />
-                <p id="uidnote" className={userFocus && username &&
-                !validName ? "instructions" : "offscreen"}>
-                    <FontAwesomeIcon icon={faInfoCircle} />
-                    4 till 24 tecken.<br />
-                    Bokstäver, siffror, underline och bindestreck är tillåtna.
-                </p>
-
+                <br />
                 <label htmlFor="password">
                     Password:
-                    <span className={validPwd ? "valid" : "hide"}>
-                        <FontAwesomeIcon icon={faCheck} />
+                    <span className={validPwd ? "valid" : "hide"}><FontAwesomeIcon icon={faCheck} />
                     </span>
-                    <span className={validPwd || !password ? "hide" : "invalid"}>
-                        <FontAwesomeIcon icon={faTimes} />
+                    <span className={validPwd || !password ? "hide" : "invalid"}><FontAwesomeIcon icon={faTimes} />
                     </span>
                 </label>
                 <input
@@ -174,46 +139,43 @@ const RegisterComponent = () => {
                     onFocus={() => setPwdFocus(true)}
                     onBlur={() => setPwdFocus(false)}
                 />
-                <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" :
-                "offscreen"}>
-                    <FontAwesomeIcon icon={faInfoCircle} />
-                    8 till 24 tecken.<br />
-                    Måste innehålla stora och små bokstäver, en siffra och ett specialtecken. <br />
-                    Tillåtna tecken: <span aria-label="utropstecken">!</span>
-                    <span aria-label="snabel-a">@</span> <span aria-label="brädgård">#</
-                    span> <span aria-label="dollar-tecken">$</span> <span
-                    aria-label="procent">%</span>
-                </p>
+                <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}></p>
+                <br />
+                <label htmlFor="password">
+                    Confirm Password:
+                    <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
+                    <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
+                </label>
                 <input
                     type="password"
                     id="confirm_psw"
                     onChange={(e) => setMatchPwd(e.target.value)}
+                    value={matchPwd}
                     required
                     aria-invalid={validMatch ? "false" : "true"}
                     aria-describedby="confirmnote"
                     onFocus={() => setMatchFocus(true)}
                     onBlur={() => setMatchFocus(false)}
                 />
-                <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" :
-                    "offscreen"}>
+                <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
                     <FontAwesomeIcon icon={faInfoCircle} />
                     Måste matcha lösenordsfältet.
                 </p>
 
                 <button disabled={!validName || !validPwd || !validMatch ? true : false}
-                        >Registrera användare</button>
+                >Sign Up!</button>
+
             </form>
             <p>
-                Redan registrerad?<br />
-                <span className="linje">
-                    {/*Lägg in router-länk till inloggningssida här*/}
-                    <a href="#">Logga in</a>
-                </span>
+{/*                Redan registrerad?<br />*/}
+                Already registered?
             </p>
+            <button onClick={() => navigate("/login")}>Log in</button>
+
         </section>
             )}
             </>
     )
 }
 
-export default RegisterComponent
+export default RegisterView

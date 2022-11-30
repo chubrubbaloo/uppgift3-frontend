@@ -2,6 +2,9 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-bottom: 200px;
 }
 
 .posts {
@@ -16,4 +19,5 @@ margin-left: 40px;
 
 .posts ul {
     list-style-type: none;
+    padding-bottom: 20px;
 }

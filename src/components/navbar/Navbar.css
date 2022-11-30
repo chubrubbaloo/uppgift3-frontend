@@ -11,10 +11,12 @@
     padding-left: 18px;
     background-color: darkgreen;
     border-right: #282c34 solid 3px;
+    position: sticky;
 }
 
 .navbar.open{
     width: 130px;
+    position: sticky;
 }
 
 .navbar .user{
