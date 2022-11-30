@@ -1,11 +1,11 @@
-.login_view{
-    background-color: rgba(95, 128, 142, 0.66);
+.login_view {
+    background-color: rgba(158, 169, 132, 0.906);
     display: grid;
     align-items: flex-start;
     justify-content: center;
-    height: 100%;
     width: 100%;
 }
+
 .login_view h1 {
     margin-top: 40px;
     justify-self: center;
@@ -15,7 +15,7 @@
 }
 
 .login_view .form{
-    background-color:rgb(78, 142, 150) ;
+    background-color:rgb(68, 109, 80) ;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -41,6 +41,6 @@ button.submit{
     letter-spacing: 1.5px;
     font-size: 15px;
     width: 30%;
-    align-self: end;
+    align-self: center;
     cursor: pointer;
 }

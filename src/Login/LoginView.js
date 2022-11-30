@@ -31,7 +31,7 @@ export default function LoginView({onSuccessfulLogin = (user) => {}}) {
     return (
         <>
 
-        <div className="login">
+        <div className="login_view">
             <h1>User Login</h1>
             <div className="form" onKeyPress={(event) => {if (event.key === "Enter") submit()}}>
                 <input ref={usernameInput} placeholder="username"/>
