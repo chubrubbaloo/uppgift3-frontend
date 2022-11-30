@@ -1,20 +1,53 @@
-import {CiLogin} from 'react-icons/ci';
+import {CiLogin, CiHome, CiUser, CiSaveUp2, CiSquareRemove} from 'react-icons/ci';
 import {UserContext} from "../../App";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import "./Navbar.css"
 import {useNavigate} from "react-router-dom"
 
 export default function Navbar() {
 
-    const navigate = useNavigate()
     const user = useContext(UserContext)
+    const [open, setOpen] = useState(false)
+
+    if (open) {
+        return (
+            <div className="navbar-container">
+                <div className={"navbar open"} onMouseLeave={() => setOpen(false)}>
+                    <div className={"user"}>
+                        {user ? <CiUser className="icon"/> : <CiSquareRemove className="icon"/>}
+                        <div className="text">{user ? user.username : "no user"}</div>
+                    </div>
+                    <Link route="/" icon={<CiHome className="icon"/>} text="Home"/>
+                    <Link route="/login" icon={<CiLogin className="icon"/>} text="Login"/>
+                    <Link route="/register" icon={<CiSaveUp2 className="icon"/>} text="Register"/>
+                </div>
+            </div>
+        )
+    }
     return (
-        <div className={"navbar"}>
-            <h3>{user ? user.username : "not logged in"}</h3>
-            <p onClick={() => navigate("/")}>home</p>
-            <p onClick={() => navigate("/login")}><CiLogin/></p>
-            <p onClick={() => navigate("/register")}>register</p>
+        <div className="navbar-container">
+            <div className={"navbar"} onMouseEnter={() => setOpen(true)}>
+                <div className={"user"}>
+                    {user ? <CiUser className="icon"/> : <CiSquareRemove className="icon"/>}
+                </div>
+                <Link route="/" icon={<CiHome className="icon"/>} text=""/>
+                <Link route="/login" icon={<CiLogin className="icon"/>} text=""/>
+                <Link route="/register" icon={<CiSaveUp2 className="icon"/>} text=""/>
+            </div>
         </div>
     )
 
+}
+
+function Link({route, icon, text}){
+const navigate = useNavigate()
+return <div className={"link"} onClick={() =>
+    navigate(route)
+}
+>
+{
+    icon
+}
+<div className="text">{text}</div>
+</div>
 }

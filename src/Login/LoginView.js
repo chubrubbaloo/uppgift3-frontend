@@ -15,10 +15,12 @@ export default function LoginView({onSuccessfulLogin = (user) => {}}) {
         const password = passwordInput.current.value
 
         if (!username || !password) {
+            
             return
+
         }
         const data = await api.login(username, password)
-        console.log(data)
+        
         if (!data.user) {
             setMessage(data.message)
             return
@@ -31,7 +33,7 @@ export default function LoginView({onSuccessfulLogin = (user) => {}}) {
     return (
         <>
 
-        <div className="login">
+        <div className="login_view">
             <h1>User Login</h1>
             <div className="form" onKeyPress={(event) => {if (event.key === "Enter") submit()}}>
                 <input ref={usernameInput} placeholder="username"/>
