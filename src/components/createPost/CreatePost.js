@@ -15,7 +15,10 @@ export default function CreatePost({onCreatedPost = (newPostData) => {}}){
             return
         }
         const newPostData = await createPost(user, title.current.value, content.current.value)
-        console.log(newPostData)
+        if ("message" in newPostData){
+            alert(newPostData.message)
+            return
+        }
         onCreatedPost(newPostData)
         clear()
     }
@@ -30,9 +33,9 @@ export default function CreatePost({onCreatedPost = (newPostData) => {}}){
     }
     if (open) {
         return (
-            <div className={'create-post'}>
-                <h3 className={"title"}><input ref={title} type="text" placeholder={"Put a title on your post!"}/></h3>
-                <p className={"content"}><textarea ref={content} placeholder={"Then write something here!"}/></p>
+            <div className={"post create"}>
+                <h3 className="title" ><input ref={title} type="text" placeholder={"Put a title on your post!"}/></h3>
+                <p className="content" ><textarea ref={content} placeholder={"Then write something here!"}/></p>
                 <button onClick={submit}>Create Post</button>
             </div>
         )

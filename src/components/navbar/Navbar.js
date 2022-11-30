@@ -1,4 +1,4 @@
-import {CiLogin, CiHome, CiUser, CiSaveUp2, CiSquareRemove} from 'react-icons/ci';
+import {CiLogin, CiHome, CiUser, CiSaveUp2, CiSquareQuestion} from 'react-icons/ci';
 import {UserContext} from "../../App";
 import {useContext, useState} from "react";
 import "./Navbar.css"
@@ -14,7 +14,7 @@ export default function Navbar() {
             <div className="navbar-container">
                 <div className={"navbar open"} onMouseLeave={() => setOpen(false)}>
                     <div className={"user"}>
-                        {user ? <CiUser className="icon"/> : <CiSquareRemove className="icon"/>}
+                        {user ? <CiUser className="icon"/> : <CiSquareQuestion className="icon"/>}
                         <div className="text">{user ? user.username : "no user"}</div>
                     </div>
                     <Link route="/" icon={<CiHome className="icon"/>} text="Home"/>
@@ -28,7 +28,7 @@ export default function Navbar() {
         <div className="navbar-container">
             <div className={"navbar"} onMouseEnter={() => setOpen(true)}>
                 <div className={"user"}>
-                    {user ? <CiUser className="icon"/> : <CiSquareRemove className="icon"/>}
+                    {user ? <CiUser className="icon"/> : <CiSquareQuestion className="icon"/>}
                 </div>
                 <Link route="/" icon={<CiHome className="icon"/>} text=""/>
                 <Link route="/login" icon={<CiLogin className="icon"/>} text=""/>

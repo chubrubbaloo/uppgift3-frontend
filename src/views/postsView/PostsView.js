@@ -13,12 +13,29 @@ const PostsView = () => {
             const data = await api.fetchData();
             setPosts(await data);
         }
-
         getPosts();
     }, []);
 
     function addPost(postData) {
         setPosts([postData, ...posts])
+    }
+
+    function onPostDelete(title){
+        const changedPosts = posts.filter((element) => {
+            return element.title !== title;
+
+        })
+        setPosts(changedPosts)
+    }
+
+    function onPostEdit(post){
+        const changedPosts = posts.map((element) => {
+            if (element.title === post.title){
+                return {...element, content:post.content}
+            }
+            return element
+        })
+        setPosts(changedPosts)
     }
 
     return (
@@ -31,7 +48,7 @@ const PostsView = () => {
                     </li>
                     {posts.map((post) => (
                         <li key={post.title}>
-                            <Post title={post.title} content={post.content} creator={post.creator}/>
+                            <Post title={post.title} content={post.content} creator={post.creator} onEdit={onPostEdit} onDelete={onPostDelete}/>
                         </li>
                     ))}
                 </ul>
