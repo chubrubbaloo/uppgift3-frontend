@@ -1,13 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as api from "../../api";
 import Post from "../../components/post/Post";
 import CreatePost from "../../components/createPost/CreatePost";
 import './PostsView.css'
-import {UserContext} from "../../App";
 
 const PostsView = () => {
-
-    const user = useContext(UserContext)
 
     const [posts, setPosts] = useState([]);
 
