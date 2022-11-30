@@ -2,7 +2,7 @@ import './App.css';
 import {createContext, useState} from "react";
 import Navbar from "./components/navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
-import ViewPosts from "./views/viewPosts/ViewPosts";
+import PostsView from "./views/postsView/PostsView";
 import LoginView from "./Login/LoginView";
 import RegisterComponent from "./RegisterComponent";
 import {useNavigate} from "react-router-dom"
@@ -23,7 +23,7 @@ function App() {
             <div className={"app"}>
                 <Navbar/>
                 <Routes>
-                    <Route index element={<ViewPosts/>}/>
+                    <Route index element={<PostsView/>}/>
                     <Route path="/login" element={<LoginView onSuccessfulLogin={loginUser}/>}/>
                     <Route path="/register" element={<RegisterComponent/>}/>
                 </Routes>

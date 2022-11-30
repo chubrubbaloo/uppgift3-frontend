@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import * as api from "../../api";
 import Post from "../../components/post/Post";
 import CreatePost from "../../components/createPost/CreatePost";
-import './ViewPosts.css'
+import './PostsView.css'
+import {UserContext} from "../../App";
 
-const ViewPosts = () => {
+const PostsView = () => {
+
+    const user = useContext(UserContext)
 
     const [posts, setPosts] = useState([]);
 
@@ -22,14 +25,14 @@ const ViewPosts = () => {
     }
 
     return (
-        <div className="post-container">
+        <div className="posts">
             <h2>Posts</h2>
             <ul>
-                <li className="post create">
+                <li className="create-post">
                     <CreatePost onCreatedPost={addPost}/>
                 </li>
                 {posts.map((post) => (
-                    <li key={post.title} className="post">
+                    <li key={post.title}>
                         <Post title={post.title} content={post.content} creator={post.creator}/>
                     </li>
                 ))}
@@ -38,4 +41,4 @@ const ViewPosts = () => {
     );
 };
 
-export default ViewPosts;
+export default PostsView;
