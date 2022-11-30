@@ -1,0 +1,120 @@
+.register-div {
+    display: flex;
+    width: 100%;
+    font-family: Arial, serif;
+    font-size: 22px;
+    color: #fff;
+    min-height: 100vh;
+    background-color: rgb(24, 114, 80);
+}
+
+.registration-successful-section {
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#already-registered-p {
+    font-size: 17px;
+    text-decoration: underline;
+    color: rgb(100, 100, 100);
+}
+
+.login-button {
+    width: 25%;
+    font-size: 22px;
+    border-radius: 0.5rem;
+    background-color: rgb(155, 155, 155);
+    color: rgb(35, 35, 35);
+    cursor: pointer;
+}
+
+.already-logged-in {
+    padding-top: 70px;
+}
+
+.register-section {
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.4);
+    position: absolute;
+    top:80px;
+    left: 151px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-bottom: 1rem;
+}
+
+.register-input,
+.sign-up-button {
+    font-size: 22px;
+    padding: 0.25rem;
+    border-radius: 0.5rem;
+}
+
+.sign-up-button {
+    background-color: rgb(213, 239, 211);
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.register-label,
+.sign-up-button {
+    margin-top: 1rem;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}

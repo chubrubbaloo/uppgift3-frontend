@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect} from "react";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {useRef, useState, useEffect} from "react";
+import {faCheck, faTimes, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import * as api from "../../api";
 import {useNavigate} from "react-router-dom";
 import "./RegisterView.css";
@@ -67,8 +67,8 @@ const RegisterView = () => {
 
         try {
             const data = await api.register(username, password)
-            if(data.messager !== "Registration successful") {
-                setErrMsg(data.messager)
+            if (data.message !== "Registration successful") {
+                setErrMsg(data.message)
                 return
             }
             setSuccess(true);
@@ -88,93 +88,101 @@ const RegisterView = () => {
 
     return (
         <>
-            {success ? (
-                <section>
-                    <h1>Registration Successful!</h1>
-                        <button onClick={() => navigate("/login")}>Log in</button>
-                </section>
-            ) : (
-        <section>
-            <p ref={errRef} className={errMsg ? "errmsg" :
-                "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Register User</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">
-                    Username:
-                    <span className={validName ? "valid" : "hide"}>
-                        <FontAwesomeIcon icon={faCheck} />
+            <article className={"register-div"}>
+                {success ? (
+                    <section className={"registration-successful-section"}>
+                        <h1>Registration Successful!</h1>
+                        <button className={"login-button"} onClick={() => navigate("/login")}>Log in</button>
+                    </section>
+                ) : (
+                    <section className={"register-section"}>
+                        <p ref={errRef} className={errMsg ? "errmsg" :
+                            "offscreen"} aria-live="assertive">{errMsg}</p>
+                        <h1>Register User</h1>
+                        <form className={"register-form"} onSubmit={handleSubmit}>
+                            <label className={"register-label"} htmlFor="username">
+                                Username:
+                                <span className={validName ? "valid" : "hide"}>
+                        <FontAwesomeIcon icon={faCheck}/>
                     </span>
-                    <span className={validName || !username ? "hide" :
-                    "invalid"}>
-                        <FontAwesomeIcon icon={faTimes} />
+                                <span className={validName || !username ? "hide" : "invalid"}><FontAwesomeIcon icon={faTimes}/>
                     </span>
-                </label>
-                <input
-                    type="text"
-                    id="username"
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    required
-                    aria-invalid={validName ? "false" : "true"}
-                    aria-describedby="uidnote"
-                    onFocus={() => setUserFocus(true)}
-                    onBlur={() => setUserFocus(false)}
-                    />
-                <br />
-                <label htmlFor="password">
-                    Password:
-                    <span className={validPwd ? "valid" : "hide"}><FontAwesomeIcon icon={faCheck} />
-                    </span>
-                    <span className={validPwd || !password ? "hide" : "invalid"}><FontAwesomeIcon icon={faTimes} />
-                    </span>
-                </label>
-                <input
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    required
-                    aria-invalid={validPwd ? "false" : "true"}
-                    aria-describedby="pwdnote"
-                    onFocus={() => setPwdFocus(true)}
-                    onBlur={() => setPwdFocus(false)}
-                />
-                <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}></p>
-                <br />
-                <label htmlFor="password">
-                    Confirm Password:
-                    <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-                    <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
-                </label>
-                <input
-                    type="password"
-                    id="confirm_psw"
-                    onChange={(e) => setMatchPwd(e.target.value)}
-                    value={matchPwd}
-                    required
-                    aria-invalid={validMatch ? "false" : "true"}
-                    aria-describedby="confirmnote"
-                    onFocus={() => setMatchFocus(true)}
-                    onBlur={() => setMatchFocus(false)}
-                />
-                <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                    <FontAwesomeIcon icon={faInfoCircle} />
-                    Måste matcha lösenordsfältet.
-                </p>
+                            </label>
+                            <input
+                                className={"register-input"}
+                                type="text"
+                                id="username"
+                                ref={userRef}
+                                autoComplete="off"
+                                onChange={(e) => setUser(e.target.value)}
+                                required
+                                aria-invalid={validName ? "false" : "true"}
+                                aria-describedby="uidnote"
+                                onFocus={() => setUserFocus(true)}
+                                onBlur={() => setUserFocus(false)}
+                            />
+                            <p id="uidnote"
+                               className={userFocus && username && !validName ? "instructions" : "offscreen"}></p>
+                            <br/>
+                            <label className={"register-label"} htmlFor="password">
+                                Password:
+                                <span className={validPwd ? "valid" : "hide"}><FontAwesomeIcon icon={faCheck}/></span>
+                                <span className={validPwd || !password ? "hide" : "invalid"}><FontAwesomeIcon
+                                    icon={faTimes}/></span>
+                            </label>
+                            <input
+                                className={"register-input"}
+                                type="password"
+                                id="password"
+                                onChange={(e) => setPwd(e.target.value)}
+                                required
+                                aria-invalid={validPwd ? "false" : "true"}
+                                aria-describedby="pwdnote"
+                                onFocus={() => setPwdFocus(true)}
+                                onBlur={() => setPwdFocus(false)}
+                            />
+                            <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}></p>
+                            <br/>
+                            <label className={"register-label"} htmlFor="password">
+                                Confirm Password:
+                                <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"}/>
+                                <FontAwesomeIcon icon={faTimes}
+                                                 className={validMatch || !matchPwd ? "hide" : "invalid"}/>
+                            </label>
+                            <input
+                                className={"register-input"}
+                                type="password"
+                                id="confirm_psw"
+                                onChange={(e) => setMatchPwd(e.target.value)}
+                                value={matchPwd}
+                                required
+                                aria-invalid={validMatch ? "false" : "true"}
+                                aria-describedby="confirmnote"
+                                onFocus={() => setMatchFocus(true)}
+                                onBlur={() => setMatchFocus(false)}
+                            />
+                            <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+                                <FontAwesomeIcon icon={faInfoCircle}/>
+                                "Confirm Password" needs to match "Password".
+                            </p>
 
-                <button disabled={!validName || !validPwd || !validMatch ? true : false}
-                >Sign Up!</button>
+                            <button className={"sign-up-button"}
+                                    disabled={!validName || !validPwd || !validMatch}
+                            >Sign Up!
+                            </button>
 
-            </form>
-            <p>
-{/*                Redan registrerad?<br />*/}
-                Already registered?
-            </p>
-            <button onClick={() => navigate("/login")}>Log in</button>
+                        </form>
+                        <section className={"already-logged-in"}>
+                            <p id={"already-registered-p"}>
+                                Already registered?
+                            </p>
+                            <button className={"login-button"} onClick={() => navigate("/login")}>Log in</button>
+                        </section>
+                    </section>
+                )}
 
-        </section>
-            )}
-            </>
+            </article>
+        </>
     )
 }
 
