@@ -6,7 +6,8 @@ export async function fetchData() {
 }
 
 export async function register(username, password) {
-    await fetch(`${backendUrl}/register`,
+
+    const response = await fetch(`${backendUrl}/register`,
         {
             method: "POST",
             mode: "cors",
@@ -16,6 +17,13 @@ export async function register(username, password) {
             body: JSON.stringify({username: username, password: password}),
         }
     )
+
+    if (response.status === 200) {
+        return {messager: "Registration successful"}
+    } else {
+        return {messager: await response.text()}
+    }
+
     //return await response.json()
     // Lägg in felhantering: user already exists... ((returnera felmeddelande från server -> front-end-div))
 }
