@@ -6,6 +6,7 @@ import PostsView from "./views/postsView/PostsView";
 import LoginView from "./views/loginView/LoginView";
 import RegisterView from "./views/registerView/RegisterView";
 import {useNavigate} from "react-router-dom"
+import User from "./entities/User";
 
 export const UserContext = createContext(null);
 
@@ -21,9 +22,10 @@ function App() {
 
 
     useEffect(() => {
-        const user = localStorage.getItem("user")
-        if (user){
-            setUser(JSON.parse(user))
+        const rawUser = localStorage.getItem("user")
+        if (rawUser){
+            const jsonUser = JSON.parse(rawUser)
+            loginUser(new User(jsonUser.username, jsonUser.token))
         }
     }, [])
 
