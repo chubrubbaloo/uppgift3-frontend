@@ -19,8 +19,8 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    height: 200px;
-    width: 150px;
+    height: 300px;
+    width: 200px;
 }
 
 .login_view .form * {
