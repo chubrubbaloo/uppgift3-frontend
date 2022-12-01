@@ -1,5 +1,5 @@
 import './App.css';
-import {createContext, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 import Navbar from "./components/navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
 import PostsView from "./views/postsView/PostsView";
@@ -16,7 +16,16 @@ function App() {
     function loginUser(user) {
         setUser(user)
         navigate("/")
+        localStorage.setItem("user", JSON.stringify(user))
     }
+
+
+    useEffect(() => {
+        const user = localStorage.getItem("user")
+        if (user){
+            setUser(JSON.parse(user))
+        }
+    }, [])
 
     return (
         <UserContext.Provider value={user}>
