@@ -68,7 +68,7 @@ const RegisterView = () => {
         // Lägg till användarnamn & lösenord till backend
         try {
             const data = await api.register(username, password)
-            if (data.message !== "Registration successful") {
+            if (data.message !== "Registration successful!") {
                 setErrMsg(data.message)
                 return
             }

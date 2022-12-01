@@ -9,7 +9,7 @@
     transition-duration: 0.18s;
     padding-top: 35px;
     padding-left: 18px;
-    background-color: darkgreen;
+    background-color:rgb(68, 109, 80) /*darkgreen*/;
     border-right: #282c34 solid 3px;
     position: sticky;
 }
