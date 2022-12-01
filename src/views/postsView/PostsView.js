@@ -21,8 +21,8 @@ const PostsView = () => {
     }
 
     function onPostDelete(title){
-        const changedPosts = posts.filter((post) => post.title !== title)
-        setPosts(changedPosts)
+        const deletedPosts = posts.filter((post) => post.title !== title)
+        setPosts(deletedPosts)
     }
 
     function onPostEdit(editedPost){

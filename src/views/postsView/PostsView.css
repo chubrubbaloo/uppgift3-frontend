@@ -5,6 +5,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
     padding-bottom: 200px;
+    background-color:rgba(220, 224, 210, 0.906)
 }
 
 .posts {
@@ -20,4 +21,5 @@ margin-left: 40px;
 .posts ul {
     list-style-type: none;
     padding-bottom: 20px;
+    
 }

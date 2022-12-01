@@ -1,7 +1,5 @@
 const backendUrl = "http://localhost:8080";
 
-/*const [jwt, setJwt] = useLocalState("", "jwt");*/
-
 export async function fetchData() {
     const response = await fetch(`${backendUrl}/posts/getAll`);
     return await response.json();
@@ -16,14 +14,14 @@ export async function register(username, password) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({username: username, password: password}),
+            body: JSON.stringify({ username: username, password: password }),
         }
     )
 
     if (response.status === 200) {
-        return {messager: "Registration successful"}
+        return { messager: "Registration successful!" }
     } else {
-        return {messager: await response.text()}
+        return { messager: await response.text() }
     }
 
     //return await response.json()
@@ -31,56 +29,56 @@ export async function register(username, password) {
 }
 
 export async function createPost(user, title, content) {
-    if (!(user)){
+    if (!(user)) {
         throw new Error("First login to post!")
     }
     const response = await fetch(`${backendUrl}/posts`, {
-        method:"POST",
+        method: "POST",
         mode: 'cors',
         headers: {
             'authorization': "bearer " + user.token,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({title: title, content: content})
+        body: JSON.stringify({ title: title, content: content })
     });
 
-    if (response.status !== 200){
-        return {message: await response.text()}
+    if (response.status !== 200) {
+        return { message: await response.text() }
     }
     return await response.json();
 }
 
 export async function editPost(user, title, newContent) {
-    if (!(user)){
+    if (!(user)) {
         throw new Error("First login to post!")
     }
     const response = await fetch(`${backendUrl}/posts`, {
-        method:"PUT",
+        method: "PUT",
         mode: 'cors',
         headers: {
             'authorization': "bearer " + user.token,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({title: title, updatedContent: newContent})
+        body: JSON.stringify({ title: title, updatedContent: newContent })
     });
-    if (response.status !== 200){
-        return {message: await response.text()}
+    if (response.status !== 200) {
+        return { message: await response.text() }
     }
     return await response.json();
 }
 
 export async function deletePost(user, title) {
-    if (!(user)){
+    if (!(user)) {
         throw new Error("First login to post!")
     }
     const response = await fetch(`${backendUrl}/posts`, {
-        method:"DELETE",
+        method: "DELETE",
         mode: 'cors',
         headers: {
             'authorization': "bearer " + user.token,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({title: title})
+        body: JSON.stringify({ title: title })
     });
 
     return response.status === 200
@@ -88,26 +86,21 @@ export async function deletePost(user, title) {
 
 export async function login(username, password) {
 
-    const response = await fetch(`${backendUrl}/login`,
-        {
-            method: "POST",
-            mode: "cors",
-            headers: {
+    const response = await fetch(`${backendUrl}/login`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username: username, password: password })
+    });
 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({username: username, password: password})
+    if (response.status === 200) {
 
-        })
-
-
-
-           if (response.status === 200) {
-
-            return await response.json();
-           }
-            else
-            return {message:"Invalid login attempt, please register!"};
+        return await response.json();
+    }
+    else
+        return { message: "Invalid login attempt, please register!" };
 
 
 }

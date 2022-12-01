@@ -3,7 +3,7 @@ import {createContext, useState} from "react";
 import Navbar from "./components/navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
 import PostsView from "./views/postsView/PostsView";
-import LoginView from "./Login/LoginView";
+import LoginView from "./views/loginView/LoginView";
 import RegisterView from "./views/registerView/RegisterView";
 import {useNavigate} from "react-router-dom"
 
