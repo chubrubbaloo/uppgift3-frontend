@@ -117,7 +117,7 @@ const RegisterView = () => {
                                 onBlur={() => setUserFocus(false)}
                             />
                             <p id="uidnote"
-                                className={userFocus && !validName ? "instructions" : "offscreen"}></p>
+                                className={userFocus && username && !validName ? "instructions" : "offscreen"}></p>
                             <br/>
 
                             {/*Password*/}
