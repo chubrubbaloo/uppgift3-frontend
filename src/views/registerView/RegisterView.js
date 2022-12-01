@@ -5,12 +5,12 @@ import * as api from "../../api";
 import {useNavigate} from "react-router-dom";
 import "./RegisterView.css";
 
-
+// RegEx
 const USER_REGEX = /^.{1,50}$/;
 const PWD_REGEX = /^.{1,50}$/;
 
 
-// Funktions-komponent: RegisterComponent
+// View (RegisterView)
 const RegisterView = () => {
 
     const navigate = useNavigate()
@@ -57,7 +57,7 @@ const RegisterView = () => {
     }, [password, matchPwd])
 
 
-//felmeddelande
+    //Felmeddelande
     useEffect(() => {
         setErrMsg('');
     }, [username, password, matchPwd])
@@ -65,6 +65,7 @@ const RegisterView = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Lägg till användarnamn & lösenord till backend
         try {
             const data = await api.register(username, password)
             if (data.message !== "Registration successful") {
@@ -73,12 +74,9 @@ const RegisterView = () => {
             }
             setSuccess(true);
 
-            // clear input fields
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
-            } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
             } else {
                 setErrMsg('Registration Failed')
             }
@@ -96,17 +94,14 @@ const RegisterView = () => {
                     </section>
                 ) : (
                     <section className={"register-section"}>
-                        <p ref={errRef} className={errMsg ? "errmsg" :
-                            "offscreen"} aria-live="assertive">{errMsg}</p>
                         <h1>Register User</h1>
                         <form className={"register-form"} onSubmit={handleSubmit}>
+
+                            {/*Username*/}
                             <label className={"register-label"} htmlFor="username">
                                 Username:
-                                <span className={validName ? "valid" : "hide"}>
-                        <FontAwesomeIcon icon={faCheck}/>
-                    </span>
-                                <span className={validName || !username ? "hide" : "invalid"}><FontAwesomeIcon icon={faTimes}/>
-                    </span>
+                                <span className={validName ? "valid" : "hide"}><FontAwesomeIcon icon={faCheck}/></span>
+                                <span className={validName || !username ? "hide" : "invalid"}><FontAwesomeIcon icon={faTimes}/></span>
                             </label>
                             <input
                                 className={"register-input"}
@@ -122,13 +117,14 @@ const RegisterView = () => {
                                 onBlur={() => setUserFocus(false)}
                             />
                             <p id="uidnote"
-                               className={userFocus && username && !validName ? "instructions" : "offscreen"}></p>
+                                className={userFocus && username && !validName ? "instructions" : "offscreen"}></p>
                             <br/>
+
+                            {/*Password*/}
                             <label className={"register-label"} htmlFor="password">
                                 Password:
                                 <span className={validPwd ? "valid" : "hide"}><FontAwesomeIcon icon={faCheck}/></span>
-                                <span className={validPwd || !password ? "hide" : "invalid"}><FontAwesomeIcon
-                                    icon={faTimes}/></span>
+                                <span className={validPwd || !password ? "hide" : "invalid"}><FontAwesomeIcon icon={faTimes}/></span>
                             </label>
                             <input
                                 className={"register-input"}
@@ -143,11 +139,12 @@ const RegisterView = () => {
                             />
                             <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}></p>
                             <br/>
-                            <label className={"register-label"} htmlFor="password">
+
+                            {/*Confirm password*/}
+                            <label className={"register-label"} htmlFor="confirm_psw">
                                 Confirm Password:
                                 <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"}/>
-                                <FontAwesomeIcon icon={faTimes}
-                                                 className={validMatch || !matchPwd ? "hide" : "invalid"}/>
+                                <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"}/>
                             </label>
                             <input
                                 className={"register-input"}
@@ -166,12 +163,18 @@ const RegisterView = () => {
                                 "Confirm Password" needs to match "Password".
                             </p>
 
-                            <button className={"sign-up-button"}
-                                    disabled={!validName || !validPwd || !validMatch}
+                            {/*"Sign-Up"*/}
+                            <button className={"sign-up-button"} disabled={!validName || !validPwd || !validMatch}
                             >Sign Up!
                             </button>
-
                         </form>
+
+                        {/*Felmeddelande från backend*/}
+                        <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+                            {errMsg}
+                        </p>
+
+                        {/*"Already logged-in"*/}
                         <section className={"already-logged-in"}>
                             <p id={"already-registered-p"}>
                                 Already registered?
