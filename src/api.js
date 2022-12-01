@@ -19,13 +19,10 @@ export async function register(username, password) {
     )
 
     if (response.status === 200) {
-        return { messager: "Registration successful!" }
+        return { message: "Registration successful!" }
     } else {
-        return { messager: await response.text() }
+        return { message: await response.text() }
     }
-
-    //return await response.json()
-    // Lägg in felhantering: user already exists... ((returnera felmeddelande från server -> front-end-div))
 }
 
 export async function createPost(user, title, content) {
