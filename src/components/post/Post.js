@@ -4,7 +4,13 @@ import {UserContext} from "../../App";
 import {FaPen, FaWindowClose, FaSave, FaMinusCircle} from 'react-icons/fa';
 import * as api from "../../api"
 
-export default function Post({title, initContent, creator, onDelete = (title) => {}, onEdit = (post) => {}}, on401 = () => {}) {
+export default function Post({
+                                 title,
+                                 initContent,
+                                 creator,
+                                 onDelete = (title) => {},
+                                 onEdit = (post) => {},
+                                 on401 = () => {}}) {
     const user = useContext(UserContext)
     const [editing, setEditing] = useState(false)
     const content = useRef()
