@@ -40,7 +40,7 @@ export default function LoginView({ onSuccessfulLogin = (user) => { } }) {
                     <input ref={usernameInput} placeholder="username" />
                     <input ref={passwordInput} placeholder="password" type="password" />
                     <button className="submit" onClick={submit}>Login</button>
-                    <button onClick={() => navigate("/register")}>Register</button>
+                    <button className="sign_up" onClick={() => navigate("/register")}>Sign Up</button>
                     <div className="message" style={{ display: message ? 'block' : 'none' }}>{message}</div>
                 </div>
             </div>
