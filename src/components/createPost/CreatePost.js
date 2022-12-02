@@ -3,7 +3,7 @@ import React, {useContext, useRef, useState} from "react";
 import "./CreatePost.css"
 import {createPost} from "../../api";
 
-export default function CreatePost({onCreatedPost = (newPostData) => {}}){
+export default function CreatePost({onCreatedPost = (newPostData) => {}, on401 = () => {}}){
 
     const user = useContext(UserContext)
     const title = useRef()
@@ -16,7 +16,11 @@ export default function CreatePost({onCreatedPost = (newPostData) => {}}){
         }
         const newPostData = await createPost(user, title.current.value, content.current.value)
         if ("message" in newPostData){
-            alert(newPostData.message)
+            if (!newPostData.message){
+                on401()
+            }else {
+                alert(newPostData.message)
+            }
             return
         }
         onCreatedPost(newPostData)

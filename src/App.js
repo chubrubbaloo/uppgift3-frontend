@@ -20,6 +20,12 @@ function App() {
         localStorage.setItem("user", JSON.stringify(user))
     }
 
+    function logoutUser() {
+        setUser(null)
+        navigate("/login")
+        localStorage.removeItem("user")
+    }
+
 
     useEffect(() => {
         const rawUser = localStorage.getItem("user")
@@ -34,7 +40,7 @@ function App() {
             <div className={"app"}>
                 <Navbar/>
                 <Routes>
-                    <Route index element={<PostsView/>}/>
+                    <Route index element={<PostsView on401={logoutUser}/>}/>
                     <Route path="/login" element={<LoginView onSuccessfulLogin={loginUser}/>}/>
                     <Route path="/register" element={<RegisterView/>}/>
                 </Routes>

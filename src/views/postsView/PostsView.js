@@ -4,7 +4,7 @@ import Post from "../../components/post/Post";
 import CreatePost from "../../components/createPost/CreatePost";
 import './PostsView.css'
 
-const PostsView = () => {
+const PostsView = ({on401 = () => {}}) => {
 
     const [posts, setPosts] = useState([]);
 
@@ -41,11 +41,11 @@ const PostsView = () => {
                 <h2>Posts</h2>
                 <ul>
                     <li>
-                        <CreatePost onCreatedPost={addPost}/>
+                        <CreatePost onCreatedPost={addPost} on401={on401}/>
                     </li>
                     {posts.map((post) => (
                         <li key={post.title}>
-                            <Post title={post.title} initContent={post.content} creator={post.creator} onEdit={onPostEdit} onDelete={onPostDelete}/>
+                            <Post title={post.title} initContent={post.content} creator={post.creator} onEdit={onPostEdit} onDelete={onPostDelete} on401={on401}/>
                         </li>
                     ))}
                 </ul>
